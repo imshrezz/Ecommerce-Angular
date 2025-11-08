@@ -19,16 +19,21 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Phone No</mat-label>
-      <input matInput formControlName="phoneno" type="tel" placeholder="Enter Contact No" />
-      <mat-icon matSuffix>phone</mat-icon>
-      <mat-error *ngIf="form.get('phoneno')?.hasError('required')"> Phone No is required </mat-error>
-      <mat-error *ngIf="form.get('phoneno')?.hasError('minlength')">
-        Phone number must be at least 10 digits
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input
+        matInput
+        formControlName="phoneno"
+        maxlength="10"
+        placeholder="Enter 10-digit number"
+      />
+      <mat-error *ngIf="form.get('phoneno')?.hasError('required')">
+        Phone number is required
+      </mat-error>
+      <mat-error *ngIf="form.get('phoneno')?.hasError('pattern')">
+        Enter a valid 10-digit phone number
       </mat-error>
     </mat-form-field>
-
 
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Email</mat-label>

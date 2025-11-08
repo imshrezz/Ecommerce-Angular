@@ -1,88 +1,3 @@
-// import { Component, OnInit, OnDestroy } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { Router } from '@angular/router';
-// import { CartService } from '../../services/cart';
-// import { Subscription } from 'rxjs';
-// import { OrderService, Order } from '../../services/order-service';
-// @Component({
-//   selector: 'app-checkout',
-//   standalone: true,
-//   imports: [CommonModule, FormsModule],
-//   templateUrl: './checkout.html',
-//   styleUrls: ['./checkout.css'],
-// })
-// export class CheckoutComponent implements OnInit, OnDestroy {
-//   cartItems: any[] = [];
-//   total = 0;
-//   private cartSubscription?: Subscription;
-
-//   address = {
-//     name: '',
-//     phoneno: '',
-//     address: '',
-//     city: '',
-//     pincode: '',
-//   };
-
-//   paymentMethod = 'cod'; // default
-
-//   constructor(
-//     private cart: CartService,
-//     private router: Router,
-//     private orderService: OrderService,
-//   ) {}
-//   user: any = {};
-//   ngOnInit() {
-//     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-
-//     // Auto-fill address details if user already has them
-//     this.address.name = this.user.name || '';
-//     this.address.phoneno = this.user.phoneno || '';
-//     this.address.address = this.user.address || '';
-//     this.address.city = this.user.city;
-//     this.address.pincode = this.user.pincode;
-
-
-//     this.cartSubscription = this.cart.items$.subscribe((items) => {
-//       this.cartItems = items;
-//       this.total = this.cart.getTotal();
-//     });
-//   }
-
-//   ngOnDestroy() {
-//     this.cartSubscription?.unsubscribe();
-//   }
-
- 
-//   placeOrder() {
-//     if (!this.address.city || !this.address.pincode) {
-//       this.snackBar.open('Please fill in your full address details!', 'Close', {
-//         duration: 3000,
-//         panelClass: ['error-toast'],
-//         horizontalPosition: 'center',
-//         verticalPosition: 'top',
-//       });
-//       return;
-//     }
-
-//     const order: Order = {
-//       id: Date.now(),
-//       items: [...this.cartItems],
-//       total: this.total,
-//       date: new Date().toLocaleString(),
-//       address: { ...this.address },
-//       paymentMethod: this.paymentMethod,
-//     };
-
-//     // Save order to service
-//     this.orderService.addOrder(order);
-//     this.cart.clear();
-//     this.router.navigate(['/order-success']);
-//   }
-// }
-
-
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -131,8 +46,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.address.name = this.user.name || '';
     this.address.phoneno = this.user.phoneno || '';
     this.address.address = this.user.address || '';
-    this.address.city = this.user.city || '';
-    this.address.pincode = this.user.pincode || '';
+    this.address.city = this.user.city;
+    this.address.pincode = this.user.pincode;
 
     this.cartSubscription = this.cart.items$.subscribe((items) => {
       this.cartItems = items;

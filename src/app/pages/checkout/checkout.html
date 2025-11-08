@@ -5,21 +5,47 @@
     <h3>Delivery Address</h3>
     <form>
       <input type="text" [(ngModel)]="address.name" name="name" placeholder="Full Name" required />
-      <input type="text" [(ngModel)]="address.phoneno" name="phone" placeholder="Phone Number" required />
-      <input type="text" [(ngModel)]="address.address" name="address" placeholder="Street Address" required />
+      <input
+        type="text"
+        [(ngModel)]="address.phoneno"
+        name="phone"
+        placeholder="Phone Number"
+        pattern="^[0-9]{10}$"
+        class="form-control"
+        #phoneno="ngModel"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="address.address"
+        name="address"
+        placeholder="Street Address"
+        required
+      />
       <input type="text" [(ngModel)]="address.city" name="city" placeholder="City" required />
-      <input type="text" [(ngModel)]="address.pincode" name="pincode" placeholder="Pincode" required />
+      <input
+        type="text"
+        id="pincode"
+        name="pincode"
+        [(ngModel)]="address.pincode"
+        required
+        pattern="^[0-9]{6}$"
+        maxlength="6"
+        class="form-control"
+        #pincode="ngModel"
+        placeholder="Pincode"
+      />
     </form>
-    
 
     <h3>Payment Method</h3>
     <label>
-      <input type="radio" name="payment" value="cod" [(ngModel)]="paymentMethod" /> Cash on Delivery
-    </label><br />
+      <input type="radio" name="payment" value="cod" [(ngModel)]="paymentMethod" /> Cash on Delivery </label
+    ><br />
     <label>
-      <input type="radio" name="payment" value="upi" [(ngModel)]="paymentMethod" /> UPI / Online Payment
+      <input type="radio" name="payment" value="upi" [(ngModel)]="paymentMethod" /> UPI / Online
+      Payment
     </label>
-    
+
     <div *ngIf="paymentMethod === 'upi'" class="qr-section">
       <h4>Scan to Pay via UPI</h4>
       <img src="/img/shreyqr.png" alt="UPI QR" />
@@ -38,6 +64,16 @@
     <h4>Total: ₹{{ total }}</h4>
     <button (click)="placeOrder()">Place Order</button>
   </div>
+
+  <!-- Error messages -->
+  <div *ngIf="pincode.invalid && pincode.touched" class="error">
+    <small *ngIf="pincode.errors?.['required']">Pincode is required</small>
+    <small *ngIf="pincode.errors?.['pattern']">Please enter a valid 6-digit pincode..</small>
+  </div>
+
+  <!-- Error messages -->
+  <div *ngIf="phoneno.invalid && phoneno.touched" class="error">
+    <small *ngIf="phoneno.errors?.['required']">phoneNo is required</small>
+    <small *ngIf="phoneno.errors?.['pattern']">Please enter a valid phone no..</small>
+  </div>
 </div>
-
-
