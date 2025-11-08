@@ -165,6 +165,6 @@ Deployed to Vercel
 
 Public API (FakeStoreAPI) allows it to run without backend setup
 
-🏁 Summary (Interview Style Answer)
+🏁 Summary 
 
 "I built a fully functional eCommerce website using Angular, integrating product data from a public API. It includes authentication, cart management, checkout with address and payment, and an order history page. I used Angular services with RxJS for state management, lazy loading for performance, and Angular Material for UI. All data like user info, orders, and cart are stored in localStorage. The project is deployed on Vercel and fully responsive."
