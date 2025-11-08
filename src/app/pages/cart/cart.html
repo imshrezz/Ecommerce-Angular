@@ -1,0 +1,50 @@
+<div class="cart-container" *ngIf="(items$ | async) as items">
+  <h2>Your Cart ({{ count }} items)</h2>
+
+  <div *ngIf="items.length; else emptyCart">
+    <mat-card *ngFor="let i of items" class="cart-item">
+      <div class="cart-item-content">
+        <img
+          [src]="i.image || 'https://via.placeholder.com/80'"
+          alt="{{ i.title }}"
+          class="cart-img"
+        />
+        <div class="cart-info">
+          <h3>{{ i.title }}</h3>
+          <p>₹{{ i.price }} × {{ i.qty }}</p>
+
+          <div class="qty-controls">
+            <button mat-mini-fab color="primary" (click)="decrease(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="qty">{{ i.qty }}</span>
+            <button mat-mini-fab color="primary" (click)="increase(i)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <button mat-icon-button color="warn" (click)="remove(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+
+    <div class="cart-summary">
+      <h3>Total: ₹{{ total }}</h3>
+      <!-- <button a routerLink="/checkout" mat-raised-button color="accent" (click)="checkout()">
+        Checkout
+      </button> -->
+      <button routerLink="/checkout" class="checkout-btn">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty">🛒 Your cart is empty</p>
+    <button mat-raised-button color="primary" routerLink="/products">
+      Back to Products
+    </button>
+  </ng-template>
+</div>

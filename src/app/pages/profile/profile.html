@@ -1,0 +1,55 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="avatar">
+      <mat-icon>account_circle</mat-icon>
+    </div>
+
+    <div class="user-details">
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.address }}</p>
+      <p>{{ user.phoneno }}</p>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <!-- ✅ Edit Profile button -->
+    <div class="edit-btn">
+      <button mat-raised-button color="accent" (click)="editProfile()">
+        <mat-icon>edit</mat-icon> Edit Profile
+      </button>
+    </div>
+  </div>
+
+  <h3 class="section-title">Order History</h3>
+
+  <div *ngIf="orders.length; else noOrders" class="orders-list">
+    <div *ngFor="let order of orders" class="order-card">
+      <div class="order-header">
+        <div>
+          <h4>Order #{{ order.id }}</h4>
+          <p class="order-date">{{ order.date }}</p>
+        </div>
+        <span class="order-total">₹{{ order.total }}</span>
+      </div>
+
+      <div class="order-items">
+        <div *ngFor="let item of order.items" class="order-item">
+          <img [src]="item.image" alt="{{ item.title }}" class="item-image" />
+          <div class="item-details">
+            <h5>{{ item.title }}</h5>
+            <p>Qty: {{ item.qty }}</p>
+            <p class="item-price">₹{{ item.price * item.qty }}</p>
+            <p>Arriving in 3–5 business days (Free Delivery)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="no-orders">
+      <mat-icon>shopping_bag</mat-icon>
+      <p>No past orders yet. Start shopping now!</p>
+      <button mat-raised-button color="primary" routerLink="/products">Browse Products</button>
+    </div>
+  </ng-template>
+</div>

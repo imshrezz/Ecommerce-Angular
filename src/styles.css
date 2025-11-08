@@ -1,0 +1,10 @@
+.snack-success {
+  background-color: #43a047 !important;
+  color: white !important;
+}
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}

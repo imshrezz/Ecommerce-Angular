@@ -1,0 +1,55 @@
+.mat-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mat-form-field {
+  margin-bottom: 0.5rem;
+}
+
+button[type='submit'] {
+  margin-top: 1rem;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+button[routerLink] {
+  margin-top: 1rem;
+}
+
+/* Add a nice hover effect to buttons */
+button:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s;
+}
+
+/* Center the form on larger screens */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Subtract navbar height */
+  background-color: #f5f5f5;
+  padding: 1rem;
+}

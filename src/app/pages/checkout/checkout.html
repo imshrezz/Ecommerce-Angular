@@ -1,0 +1,43 @@
+<h2>Checkout</h2>
+
+<div class="checkout-container">
+  <div class="left">
+    <h3>Delivery Address</h3>
+    <form>
+      <input type="text" [(ngModel)]="address.name" name="name" placeholder="Full Name" required />
+      <input type="text" [(ngModel)]="address.phoneno" name="phone" placeholder="Phone Number" required />
+      <input type="text" [(ngModel)]="address.address" name="address" placeholder="Street Address" required />
+      <input type="text" [(ngModel)]="address.city" name="city" placeholder="City" required />
+      <input type="text" [(ngModel)]="address.pincode" name="pincode" placeholder="Pincode" required />
+    </form>
+    
+
+    <h3>Payment Method</h3>
+    <label>
+      <input type="radio" name="payment" value="cod" [(ngModel)]="paymentMethod" /> Cash on Delivery
+    </label><br />
+    <label>
+      <input type="radio" name="payment" value="upi" [(ngModel)]="paymentMethod" /> UPI / Online Payment
+    </label>
+    
+    <div *ngIf="paymentMethod === 'upi'" class="qr-section">
+      <h4>Scan to Pay via UPI</h4>
+      <img src="/img/shreyqr.png" alt="UPI QR" />
+      <p>UPI ID: shreyashkhode@upi</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <h3>Order Summary</h3>
+    <div *ngFor="let item of cartItems" class="summary-item">
+      <img [src]="item.image" alt="Product Image" />
+      <p>{{ item.title }}</p>
+      <span>₹{{ item.price * item.qty }}</span>
+    </div>
+    <hr />
+    <h4>Total: ₹{{ total }}</h4>
+    <button (click)="placeOrder()">Place Order</button>
+  </div>
+</div>
+
+

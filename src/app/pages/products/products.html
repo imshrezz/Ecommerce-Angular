@@ -1,0 +1,71 @@
+<!-- <div class="products-container" *ngIf="!loading; else loadingTemplate">
+  <mat-card *ngFor="let product of products" class="product-card">
+    <img mat-card-image [src]="product.image" alt="{{ product.title }}" />
+    <mat-card-content>
+      <h3>{{ product.title | slice : 0 : 25 }}...</h3>
+      <p>{{ product.price * 83 | currency : 'INR' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [routerLink]="['/product', product.id]">
+        View Details
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #loadingTemplate>
+  <p class="loading">Loading products...</p>
+</ng-template> -->
+
+<div *ngIf="!loading; else loadingTpl">
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="applyFilters()" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="applyFilters()">
+        <mat-option value="">All</mat-option>
+        <mat-option *ngFor="let c of categories" [value]="c">{{ c }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="products-container" *ngIf="filteredProducts.length > 0; else noProducts">
+    <mat-card *ngFor="let product of filteredProducts" class="product-card">
+      <img mat-card-image [src]="product.image" alt="product" />
+      <mat-card-content>
+        <h3>{{ product.title | slice : 0 : 25 }}...</h3>
+        <p>₹{{ product.price }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['/product', product.id]">
+          View Details
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading-container">
+    <mat-progress-spinner color="primary" mode="indeterminate" diameter="60">
+    </mat-progress-spinner>
+    <p>Loading products...</p>
+  </div>
+</ng-template>
+<ng-template #noProducts>
+  <div class="no-products-container">
+    <img
+      src="/img/noproduct.png"
+      alt="No products"
+      class="no-products-img"
+    />
+    <p>We couldn’t find any products matching your search.</p>
+    <button mat-raised-button color="primary" (click)="resetFilters()">
+      Continue Shopping
+    </button>
+  </div>
+</ng-template>
